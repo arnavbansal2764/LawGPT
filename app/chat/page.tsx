@@ -14,9 +14,9 @@ const ChatPage = () => {
         <h2>Examples</h2>
     </div>
     <div className="space-y-2">
-        <p className="infoText">"Explain the concept of due process"</p>
-        <p className="infoText">"What are the key differences between civil and criminal law?"</p>
-        <p className="infoText">"What is the significance of the Miranda rights?"</p>
+        <p className="infoText">&quot;Explain the concept of due process&quot;</p>
+        <p className="infoText">&quot;What are the key differences between civil and criminal law?&quot;</p>
+        <p className="infoText">&quot;What is the significance of the Miranda rights?&quot;</p>
     </div>
 </div>
 <div>
@@ -25,9 +25,9 @@ const ChatPage = () => {
         <h2>Capabilities</h2>
     </div>
     <div className="space-y-2">
-        <p className="infoText">"Provide detailed legal analysis"</p>
-        <p className="infoText">"Summarize landmark Supreme Court cases"</p>
-        <p className="infoText">"Assist with legal research and citations"</p>
+        <p className="infoText">&quot;Provide detailed legal analysis&quot;</p>
+        <p className="infoText">&quot;Summarize landmark Supreme Court cases&quot;</p>
+        <p className="infoText">&quot;Assist with legal research and citations&quot;</p>
     </div>
 </div>
 <div>
@@ -36,9 +36,9 @@ const ChatPage = () => {
         <h2>Special Features</h2>
     </div>
     <div className="space-y-2">
-        <p className="infoText">"Advanced natural language understanding tailored for legal texts"</p>
-        <p className="infoText">"Access to a vast database of legal precedents and statutes"</p>
-        <p className="infoText">"Interactive tools for creating legal documents"</p>
+        <p className="infoText">&quot;Advanced natural language understanding tailored for legal texts&quot;</p>
+        <p className="infoText">&quot;Access to a vast database of legal precedents and statutes&quot;</p>
+        <p className="infoText">&quot;Interactive tools for creating legal documents&quot;</p>
     </div>
 </div>
 

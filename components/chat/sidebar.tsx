@@ -6,12 +6,13 @@ import { db } from "@/firebase";
 import { collection, orderBy, query } from "firebase/firestore";
 import ChatRow from "./chatrow";
 import { usePathname } from "next/navigation";
+import ModelSelection from "./model-selection";
 
 const SideBar = () => {
     const { session } = useSession();
-    
+
     const [chats, loading, error] = useCollection(
-        session && query( collection(db, 'users', session.user?.username!, "chats"),orderBy("createdAt","asc"))
+        session && query(collection(db, 'users', session.user?.username!, "chats"), orderBy("createdAt", "asc"))
     );
     console.log(chats);
     const userButtonAppearance = {
@@ -26,12 +27,12 @@ const SideBar = () => {
             <div className="flex-1">
                 <div>
                     <NewChat />
-                    <div>
-                        {/* modelselection */}
+                    <div className="hidden sm:inline">
+                        <ModelSelection />
                     </div>
                     {chats?.docs.map(chat => (
 
-                        <ChatRow key={chat.id} id={chat.id}/>
+                        <ChatRow key={chat.id} id={chat.id} />
                     ))}
                 </div>
             </div>

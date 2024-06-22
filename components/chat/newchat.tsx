@@ -1,7 +1,6 @@
 'use client';
 import { db } from "@/firebase";
 import { useSession } from "@clerk/nextjs";
-import { auth, clerkClient, getAuth } from "@clerk/nextjs/server";
 import { PlusIcon } from "@heroicons/react/24/solid";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useRouter } from "next/navigation";
