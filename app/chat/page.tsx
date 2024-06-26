@@ -1,12 +1,13 @@
 
 import { AcademicCapIcon, BoltIcon, BookOpenIcon, ExclamationTriangleIcon, ScaleIcon, SunIcon } from "@heroicons/react/24/outline";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 
 const ChatPage = () => {
 
     return (
         <div className="text-white flex flex-col items-center justify-center h-screen px-2">
-            <h1 className="text-5xl font-bold mb-20">LawGPT</h1>
+            <Image src='/bannerfinal.png' alt="logo" width={500} height={500} className="" />
             <div className="flex space-x-3 text-center">
             <div>
     <div className="flex flex-col items-center justify-center mb-5">

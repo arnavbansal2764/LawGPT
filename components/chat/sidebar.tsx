@@ -6,7 +6,6 @@ import { db } from "@/firebase";
 import { collection, orderBy, query } from "firebase/firestore";
 import ChatRow from "./chatrow";
 import { usePathname } from "next/navigation";
-import ModelSelection from "./model-selection";
 
 const SideBar = () => {
     const { session } = useSession();
@@ -27,9 +26,7 @@ const SideBar = () => {
             <div className="flex-1">
                 <div>
                     <NewChat />
-                    <div className="hidden sm:inline">
-                        <ModelSelection />
-                    </div>
+                    
                     {chats?.docs.map(chat => (
 
                         <ChatRow key={chat.id} id={chat.id} />

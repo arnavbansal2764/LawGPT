@@ -4,6 +4,7 @@ import { DocumentData } from "firebase/firestore";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import React from "react";
+import Typewriter from "typewriter-effect";
 
 type Props = {
   message: DocumentData;
@@ -20,8 +21,15 @@ function Message({ message }: Props) {
     >
       <div className="flex space-x-5 px-10 max-w-2xl mx-auto">
         <Image src={message.user.avatar} alt="" width={500}
-      height={500} className="h-8 w-8" />
-        <p className="pt-1 text-sm">{message.text}</p>
+          height={500} className="h-8 w-8" />
+        <p className="pt-1 text-sm">
+          <Typewriter onInit={(typewriter) => {
+            typewriter
+              .typeString(message.data())
+              .pauseFor(1500)
+              .start();
+          }} />
+        </p>
       </div>
     </motion.div>
   );

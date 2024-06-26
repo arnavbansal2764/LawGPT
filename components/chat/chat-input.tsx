@@ -1,96 +1,30 @@
 'use client';
-import { db } from "@/firebase";
 import { useSession } from "@clerk/nextjs";
-import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { FormEvent, useState } from "react";
-import toast from "react-hot-toast";
-import useSWR from "swr";
-import ModelSelection from "./model-selection";
+import {  useEffect, useState } from "react";
+import { useChat } from 'ai/react';
+import { adminDb } from "@/firebaseAdmin";
 type Props = {
   chatId: string;
 };
 
 const ChatInput = ({ chatId }: Props) => {
-  const [prompt, setPrompt] = useState("");
   const { session } = useSession();
-  const { data: model } = useSWR("model", {
-    fallbackData: "text-davinci-003",
+  const {input, handleInputChange, handleSubmit } = useChat({
+    api: '/api/chat',
+    body: {
+      chatId: chatId,
+    }
   });
-  const [loading, setIsLoading] = useState(true);
-  const sendMessage = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    if (!prompt) {
-      toast.error("Please provide a prompt.");
-      return;
-    }
-      
-
-    if (!session || !session.user || !session.user.username) {
-      console.error("Session or user information is missing.");
-      return;
-    }
-
-    const message: Message = {
-      text: prompt,
-      createdAt: serverTimestamp(),
-      user: {
-        _id: session.user.username,
-        name: session.user.fullName,
-        avatar: session.user.imageUrl || `https://ui-avatars.com/api/?name=${session.user.username}`,
-      }
-    };
-
-    try {
-      if (!chatId) {
-        throw new Error("chatId is undefined");
-      }
-
-      await addDoc(
-        collection(db, "users", session.user.username, 'chats', chatId, 'messages'),
-        message
-      );
-    } catch (e) {
-      console.error("An error occurred:", e);
-      return;
-    }
-
-    const notification = toast.loading(`Working on it...`);
-
-    try {
-      const response = await fetch(`/api/askQuestion`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ prompt, chatId, model, session }),
-      })
-        .then(() => {
-          toast.success(`Responded!`, {
-            id: notification,
-
-          });
-          setPrompt("");
-          setIsLoading(true);
-        })
-
-    } catch (error: any) {
-      console.error("Failed to fetch the answer:", error);
-      toast.error(`Failed to get a response.`, {
-        id: notification,
-      });
-    }
-  };
-
+  const [loading, isLoading] = useState(true);
+  
   return (
     <div className="bg-gray-700/50 text-gray-400 rounded-lg text-sm">
-      <form onSubmit={sendMessage} className="p-5 space-x-5 flex">
+      <form onSubmit={e=>{handleSubmit(e,{options:{body:{chatId:chatId}}})}} className="p-5 space-x-5 flex">
         <input
           type="text"
           placeholder="Type your message here..."
-          value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
+          value={input}
+          onChange={handleInputChange}
           disabled={!session}
           className={`bg-transparent focus:outline-none flex-1 disabled:cursor-not-allowed disabled:text-gray-300 ${!loading && "animate-pulse"
             }`}
@@ -98,7 +32,7 @@ const ChatInput = ({ chatId }: Props) => {
         {loading ? (
           <button
             type="submit"
-            disabled={!prompt || !session}
+            disabled={!session}
             className="bg-[#11A37F] hover:opacity-50 text-white font-bold px-4 py-2 rounded disabled:bg-gray-300 disabled:cursor-not-allowed"
           >
             <svg
@@ -139,9 +73,6 @@ const ChatInput = ({ chatId }: Props) => {
           </button>
         )}
       </form>
-      <div className="md:hidden">
-        <ModelSelection />
-      </div>
     </div>
   );
 }

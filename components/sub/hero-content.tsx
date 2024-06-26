@@ -19,9 +19,9 @@ const HeroContent = () => {
     <motion.div
       initial="hidden"
       animate="visible"
-      className="flex flex-row items-center justify-center px-20 mt-40 w-full z-[20]"
+      className="flex flex-row items-center justify-center px-20 mt-40 w-full z-[20] mx-auto "
     >
-      <div className="h-full w-full flex flex-col gap-5 justify-center m-auto text-start">
+      <div className="h-full w-full flex flex-col gap-5 justify-center mx-auto text-start">
         <motion.div
           variants={slideInFromTop}
           className="Welcome-box py-[8px] px-[7px] border border-[#7042f88b] opacity-[0.9]"
@@ -75,7 +75,7 @@ const HeroContent = () => {
         className="w-full h-full flex justify-center items-center"
       >
         <Image
-          src="/mainIconsdark.svg"
+          src="/bannerfinal.png"
           alt="work icons"
           height={650}
           width={650}
