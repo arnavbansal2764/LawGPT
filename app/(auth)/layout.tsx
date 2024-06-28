@@ -1,15 +1,13 @@
-export default function AuthLayout({
-    children,
-  }: {
-    children: React.ReactNode;
-  }) {
-    return (
-      <div className="flex items-center justify-center h-screen " >
-        
+import StarsCanvas from "@/components/main/starBackground";
 
-        {children}
-         
-      </div>
-    );
-  }
-  
+export default function AuthLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex items-center justify-center h-screen " >
+      {children}
+    </div>
+  );
+}

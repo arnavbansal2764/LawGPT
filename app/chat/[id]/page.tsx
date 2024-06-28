@@ -1,3 +1,4 @@
+'use client';
 import Chat from "@/components/chat/chat";
 import ChatInput from "@/components/chat/chat-input";
 import { useSession } from "@clerk/nextjs";
@@ -10,6 +11,8 @@ import Typewriter from "typewriter-effect";
 import logo from '@/public/logo.png'
 import { adminDb } from "@/firebaseAdmin";
 import ReactMarkdown from 'react-markdown';
+import { redirect } from "next/navigation";
+import { auth } from "@clerk/nextjs/server";
 type Props = {
     params: {
         id: string;
